@@ -29,3 +29,14 @@ This project also contains a `Dockerfile` as well as a pre-built [Docker image](
 
 You will also find the `docker-compose.yml` file with which you can easily set up your own instance of the bot.
 Just specify the path to your config etc. in said docker-compose file.
+***********************
+The config.py is never included into the container since it contains secrets (such as the bot token). I explicitly excluded it via the .dockerignore file
+
+Python-BlackJackBot/.dockerignore
+
+Line 103 in 3d93215
+
+ config.py 
+Instead you should mount the file via a docker volume.
+
+docker run -v ./config.py:/blackjackbot/config.py blackjack
